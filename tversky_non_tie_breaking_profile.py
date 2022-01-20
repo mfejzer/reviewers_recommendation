@@ -21,7 +21,7 @@ def callculate_tversky_for_reviewers(reviewers, commit_count_words):
         m_max = i / ( i + a * d1 + (1-a) * d2)
         top[m_max].append(r)
 
-    sorted_top = sorted(list(top.keys()), reverse=True)
+    sorted_top = sorted(top.keys(), reverse=True)
 
     return top, sorted_top
 
@@ -99,7 +99,7 @@ def parse_file(f_in):
 
     precision = collections.Counter()
     recall = collections.Counter()
-    for key, value in list(prediction.items()):
+    for key, value in prediction.items():
         precision[key] = float(value) / sum(i for i in suggested_reviewers_count[key])
         recall[key] = float(value) / reviews_size
 

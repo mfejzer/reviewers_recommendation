@@ -14,7 +14,7 @@ from tqdm import tqdm
 class ExtendedCounter(Counter):
     def __mul__(self, ext):
         ext_words = self.copy()
-        for k, v in list(ext_words.items()):
+        for k, v in ext_words.items():
             ext_words[k] = v * ext
         return ext_words
 
@@ -40,14 +40,14 @@ def callculate_tversky_for_reviewers(reviewers, commit_count_words, reviewers_la
         m_max = i / ( i + a * d1 + (1-a) * d2)
         top[m_max].append(r)
 
-    sorted_top = sorted(list(top.keys()), reverse=True)
+    sorted_top = sorted(top.keys(), reverse=True)
 
     return top, sorted_top
 
 def sorted_list_by_date(users, users_last_date):
     selected_users_dates = {u:users_last_date[u] for u in users}
 
-    out = sorted(list(selected_users_dates.items()), key=operator.itemgetter(1), reverse=True)
+    out = sorted(selected_users_dates.items(), key=operator.itemgetter(1), reverse=True)
     return [o[0] for o in out]
 
 def get_top_by_date(sorted_top, top, users_last_date):
@@ -191,12 +191,12 @@ def parse_file(f_in):
     precision_date = collections.Counter()
     recall_date = collections.Counter()
 
-    for key, value in list(prediction_id.items()):
+    for key, value in prediction_id.items():
         precision_id[key] = float(value) / sum(i for i in suggested_reviewers_count_id[key])
         recall_id[key] = float(value) / review_count
         prediction_id[key] = float(value) / review_count
 
-    for key, value in list(prediction_date.items()):
+    for key, value in prediction_date.items():
         precision_date[key] = float(value) / sum(i for i in suggested_reviewers_count_date[key])
         recall_date[key] = float(value) / review_count
         prediction_date[key] = float(value) / review_count

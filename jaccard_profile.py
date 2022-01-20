@@ -24,7 +24,7 @@ def parse_file(f_in):
     reviews = sorted(reviews, key=itemgetter('changeId'))
     for index, review in enumerate(reviews):
         files = review['files']
-        files = list(map(fast_file_path_to_list, files))
+        files = map(fast_file_path_to_list, files)
         review['files'] = files
 
     return reviews
@@ -138,18 +138,18 @@ class TopN:
     def results(self):
         precision = collections.Counter()
         recall = collections.Counter()
-        for key, value in list(self.prediction.items()):
+        for key, value in self.prediction.items():
             precision[key] = float(value) / sum(i for i in self.suggested_reviewers_count[key])
             recall[key] = float(value) / self.reviewer_count
         mrr = self.mrr_sum / self.mrr_count
         print_topN(recall)
         print_mrr(mrr)
         print('----')
-        for key, value in list(self.prediction.items()):
+        for key, value in self.prediction.items():
             print(key, sum(i for i in self.suggested_reviewers_count[key]))
         print('----')
         print('----')
-        for key, value in list(self.prediction.items()):
+        for key, value in self.prediction.items():
             print(key, value)
         print('----')
         print_precision(precision)
@@ -157,7 +157,7 @@ class TopN:
         return self.suggested_reviewers_count, precision, self.mrr_sum / self.mrr_count
 
 def get_top_by_date(top, users_last_date):
-    sorted_top = sorted(list(top.keys()), reverse=True)
+    sorted_top = sorted(top.keys(), reverse=True)
  
     ret_top = collections.defaultdict(list)
     t_ret_top = []
@@ -184,7 +184,7 @@ def get_top_by_date(top, users_last_date):
 def sorted_list_by_date(users, users_last_date):
     selected_users_dates = {u:users_last_date[u] for u in users}
 
-    out = sorted(list(selected_users_dates.items()), key=itemgetter(1), reverse=True)
+    out = sorted(selected_users_dates.items(), key=itemgetter(1), reverse=True)
     return [o[0] for o in out]
 
 
