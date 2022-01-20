@@ -6,7 +6,7 @@ import math
 import psutil
 
 from collections import Counter
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 from operator import itemgetter
 from time import mktime, strptime
 from tqdm import tqdm

@@ -1,5 +1,4 @@
-import collections 
-import itertools
+import collections
 import json
 import psutil
 import sys
