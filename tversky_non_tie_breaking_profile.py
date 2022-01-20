@@ -21,7 +21,7 @@ def callculate_tversky_for_reviewers(reviewers, commit_count_words):
         m_max = i / ( i + a * d1 + (1-a) * d2)
         top[m_max].append(r)
 
-    sorted_top = sorted(top.keys(), reverse=True)
+    sorted_top = sorted(list(top.keys()), reverse=True)
 
     return top, sorted_top
 
@@ -99,32 +99,32 @@ def parse_file(f_in):
 
     precision = collections.Counter()
     recall = collections.Counter()
-    for key, value in prediction.items():
+    for key, value in list(prediction.items()):
         precision[key] = float(value) / sum(i for i in suggested_reviewers_count[key])
         recall[key] = float(value) / reviews_size
 
     for p in sorted(prediction): 
-        print "Top %d = %f" % (p, float(prediction[p]) / reviews_size)
-    print "MRR %f" % (mrr_sum / mrr_count)
+        print("Top %d = %f" % (p, float(prediction[p]) / reviews_size))
+    print("MRR %f" % (mrr_sum / mrr_count))
 
     print_precision(precision)
     print_recall(recall)
 
     current_process = psutil.Process()
     current_memory_info = current_process.memory_info()
-    print current_memory_info 
-    print '####'
-    print suggested_reviewers_count[1]
+    print(current_memory_info) 
+    print('####')
+    print(suggested_reviewers_count[1])
 
 def print_precision(precision_top):
-    print "Precision"
+    print("Precision")
     for n in sorted(precision_top): 
-        print "%f" % (float(precision_top[n]))
+        print("%f" % (float(precision_top[n])))
 
 def print_recall(recall_top):
-    print "Recall"
+    print("Recall")
     for n in sorted(recall_top): 
-        print "%f" % (float(recall_top[n]))
+        print("%f" % (float(recall_top[n])))
 
 
 

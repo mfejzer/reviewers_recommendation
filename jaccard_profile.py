@@ -14,7 +14,8 @@ def file_path_to_list(file_path):
 
 # 5% speed boost using encode + intern
 def fast_file_path_to_list(file_path):
-    return [intern(w.encode('ascii','replace')) for w in file_path_to_list(file_path)]
+    # with Python 3.x JSON parser returns 'str', not 'bytes'; no need for .encode()
+    return [sys.intern(w) for w in file_path_to_list(file_path)]
 
 
 def parse_file(f_in):
@@ -23,7 +24,7 @@ def parse_file(f_in):
     reviews = sorted(reviews, key=itemgetter('changeId'))
     for index, review in enumerate(reviews):
         files = review['files']
-        files = map(fast_file_path_to_list, files)
+        files = list(map(fast_file_path_to_list, files))
         review['files'] = files
 
     return reviews
@@ -137,26 +138,26 @@ class TopN:
     def results(self):
         precision = collections.Counter()
         recall = collections.Counter()
-        for key, value in self.prediction.items():
+        for key, value in list(self.prediction.items()):
             precision[key] = float(value) / sum(i for i in self.suggested_reviewers_count[key])
             recall[key] = float(value) / self.reviewer_count
         mrr = self.mrr_sum / self.mrr_count
         print_topN(recall)
         print_mrr(mrr)
-        print '----'
-        for key, value in self.prediction.items():
-            print key, sum(i for i in self.suggested_reviewers_count[key])
-        print '----'
-        print '----'
-        for key, value in self.prediction.items():
-            print key, value
-        print '----'
+        print('----')
+        for key, value in list(self.prediction.items()):
+            print(key, sum(i for i in self.suggested_reviewers_count[key]))
+        print('----')
+        print('----')
+        for key, value in list(self.prediction.items()):
+            print(key, value)
+        print('----')
         print_precision(precision)
         print_recall(recall)
         return self.suggested_reviewers_count, precision, self.mrr_sum / self.mrr_count
 
 def get_top_by_date(top, users_last_date):
-    sorted_top = sorted(top.keys(), reverse=True)
+    sorted_top = sorted(list(top.keys()), reverse=True)
  
     ret_top = collections.defaultdict(list)
     t_ret_top = []
@@ -183,26 +184,26 @@ def get_top_by_date(top, users_last_date):
 def sorted_list_by_date(users, users_last_date):
     selected_users_dates = {u:users_last_date[u] for u in users}
 
-    out = sorted(selected_users_dates.items(), key=itemgetter(1), reverse=True)
+    out = sorted(list(selected_users_dates.items()), key=itemgetter(1), reverse=True)
     return [o[0] for o in out]
 
 
 def print_topN(prediction):
     for p in sorted(prediction): 
-        print "Top %d = %f" % (p, float(prediction[p]))
+        print("Top %d = %f" % (p, float(prediction[p])))
 
 def print_mrr(mrr):
-    print "Mean reciprocal rank = %f" % (mrr)
+    print("Mean reciprocal rank = %f" % (mrr))
 
 def print_precision(precision_top):
-    print "Precision"
+    print("Precision")
     for n in sorted(precision_top): 
-        print "%f" % (float(precision_top[n]))
+        print("%f" % (float(precision_top[n])))
 
 def print_recall(recall_top):
-    print "Recall"
+    print("Recall")
     for n in sorted(recall_top): 
-        print "%f" % (float(recall_top[n]))
+        print("%f" % (float(recall_top[n])))
 
 
 
@@ -212,17 +213,17 @@ def main():
          (suggested_reviewers_count, prediction, mrr), (total, transformation, update, similarity), (all_profiles_size, average_profile_size, memory_info) = process_reviews(reviews)
          print_time(total, transformation, update, similarity)
          print_size(all_profiles_size, average_profile_size)
-         print memory_info
+         print(memory_info)
 
 def print_time(total, transformation, update, similarity):
-    print "Total time = %f" % (total)
-    print "Total review to multiset transformation time = %f" % (transformation)
-    print "Total profile update time = %f" % (update)
-    print "Total profile to review similarity time = %f" % (similarity)
+    print("Total time = %f" % (total))
+    print("Total review to multiset transformation time = %f" % (transformation))
+    print("Total profile update time = %f" % (update))
+    print("Total profile to review similarity time = %f" % (similarity))
 
 def print_size(all_profiles, average_profile):
-    print "All profiles size in bytes = %f" % (all_profiles)
-    print "Average profile size in bytes = %f" % (average_profile)
+    print("All profiles size in bytes = %f" % (all_profiles))
+    print("Average profile size in bytes = %f" % (average_profile))
 
 if __name__ == '__main__':
     main()
