@@ -68,6 +68,7 @@ def parse_file(f_in):
     mrr_count = 0.0
 
     reviews_size = 0.0
+    empty_profile = 0 # computed but unused
 
     for index,d in enumerate(tqdm(data)):
 
