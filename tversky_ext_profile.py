@@ -6,7 +6,7 @@ import math
 import psutil
 
 from collections import Counter
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 from operator import itemgetter
 from time import mktime, strptime
 from tqdm import tqdm
@@ -202,33 +202,33 @@ def parse_file(f_in):
         prediction_date[key] = float(value) / review_count
 
 
-    print "Id ext"
+    print("Id ext")
     for p in sorted(prediction_id): 
-        print "Top %d = %f" % (p, float(prediction_id[p]))
-    print "MRR %f" % (mrr_sum_id / mrr_count_id)
+        print("Top %d = %f" % (p, float(prediction_id[p])))
+    print("MRR %f" % (mrr_sum_id / mrr_count_id))
     print_precision(precision_id)
     print_recall(recall_id)
-    print "Date ext"
+    print("Date ext")
     for p in sorted(prediction_date): 
-        print "Top %d = %f" % (p, float(prediction_date[p]))
-    print "MRR %f" % (mrr_sum_date / mrr_count_date)
+        print("Top %d = %f" % (p, float(prediction_date[p])))
+    print("MRR %f" % (mrr_sum_date / mrr_count_date))
     print_precision(precision_date)
     print_recall(recall_date)
     
     current_process = psutil.Process()
     current_memory_info = current_process.memory_info()
-    print current_memory_info
+    print(current_memory_info)
  
 
 def print_precision(precision_top):
-    print "Precision"
+    print("Precision")
     for n in sorted(precision_top): 
-        print "%f" % (float(precision_top[n]))
+        print("%f" % (float(precision_top[n])))
 
 def print_recall(recall_top):
-    print "Recall"
+    print("Recall")
     for n in sorted(recall_top): 
-        print "%f" % (float(recall_top[n]))
+        print("%f" % (float(recall_top[n])))
 
 def convert_date(date_as_string):
     return datetime.fromtimestamp(mktime(strptime(date_as_string[:-3], "%Y-%m-%d %H:%M:%S.%f")))

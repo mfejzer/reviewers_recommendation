@@ -1,0 +1,52 @@
+cff-version: 1.2.0
+title: >-
+  Profile based recommendation of code reviewers -
+  Algorithm implementation
+message: >-
+  Please cite this software using the metadata from
+  'preferred-citation'.
+type: software
+version: 1.0
+authors:
+  - given-names: Mikołaj
+    family-names: Fejzer
+    email: mfejzer@mat.umk.pl
+  - given-names: Piotr
+    family-names: Przymus
+    email: eror@mat.umk.pl
+  - given-names: Krzysztof
+    family-names: Stencel
+    email: stencel@mimuw.edu.pl
+repository-code: 'https://github.com/mfejzer/reviewers_recommendation'
+preferred-citation:
+  type: article
+  authors:
+    - given-names: Mikołaj
+      family-names: Fejzer
+      email: mfejzer@mat.umk.pl
+      affiliation: >-
+        Faculty of Mathematics and Computer Science,
+        Nicolaus Copernicus University, Toruń, Poland
+      orcid: 'https://orcid.org/0000-0003-1496-2289'
+    - given-names: Piotr
+      family-names: Przymus
+      email: eror@mat.umk.pl
+      affiliation: >-
+        Faculty of Mathematics and Computer Science,
+        Nicolaus Copernicus University, Toruń, Poland
+      orcid: 'https://orcid.org/0000-0001-9548-2388'
+    - given-names: Krzysztof
+      family-names: Stencel
+      email: stencel@mimuw.edu.pl
+      affiliation: >-
+        Faculty of Mathematics, Informatics and Mechanics,
+        University of Warsaw, Warsaw, Poland
+      orcid: 'https://orcid.org/0000-0001-6356-4872'
+  doi: "10.1007/s10844-017-0484-1"
+  title: "Profile based recommendation of code reviewers"
+  journal: "J. Intell. Inf. Syst."
+  start: 597 # First page number
+  end: 619 # Last page number
+  volume: 50
+  issue: 3
+  year: 2018

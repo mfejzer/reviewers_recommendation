@@ -68,6 +68,7 @@ def parse_file(f_in):
     mrr_count = 0.0
 
     reviews_size = 0.0
+    empty_profile = 0 # computed but unused
 
     for index,d in enumerate(tqdm(data)):
 
@@ -104,27 +105,27 @@ def parse_file(f_in):
         recall[key] = float(value) / reviews_size
 
     for p in sorted(prediction): 
-        print "Top %d = %f" % (p, float(prediction[p]) / reviews_size)
-    print "MRR %f" % (mrr_sum / mrr_count)
+        print("Top %d = %f" % (p, float(prediction[p]) / reviews_size))
+    print("MRR %f" % (mrr_sum / mrr_count))
 
     print_precision(precision)
     print_recall(recall)
 
     current_process = psutil.Process()
     current_memory_info = current_process.memory_info()
-    print current_memory_info 
-    print '####'
-    print suggested_reviewers_count[1]
+    print(current_memory_info) 
+    print('####')
+    print(suggested_reviewers_count[1])
 
 def print_precision(precision_top):
-    print "Precision"
+    print("Precision")
     for n in sorted(precision_top): 
-        print "%f" % (float(precision_top[n]))
+        print("%f" % (float(precision_top[n])))
 
 def print_recall(recall_top):
-    print "Recall"
+    print("Recall")
     for n in sorted(recall_top): 
-        print "%f" % (float(recall_top[n]))
+        print("%f" % (float(recall_top[n])))
 
 
 
