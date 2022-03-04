@@ -8,7 +8,6 @@ import psutil
 from collections import Counter
 from datetime import datetime, timedelta
 from operator import itemgetter
-from time import mktime, strptime
 from tqdm import tqdm
 
 class ExtendedCounter(Counter):
@@ -231,7 +230,7 @@ def print_recall(recall_top):
         print("%f" % (float(recall_top[n])))
 
 def convert_date(date_as_string):
-    return datetime.fromtimestamp(mktime(strptime(date_as_string[:-3], "%Y-%m-%d %H:%M:%S.%f")))
+    return datetime.strptime(date_as_string[:-3], "%Y-%m-%d %H:%M:%S.%f")
 
 def change_id_ext(last, current):
     half_life = 2500 
